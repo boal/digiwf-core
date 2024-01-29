@@ -1,6 +1,6 @@
 {
-  "name": "DMS: Sachakte suchen",
-  "id": "de.muenchen.digitalwf.templates.search-file",
+  "name": "Update document in dms",
+  "id": "de.muenchen.digitalwf.templates.update-document-in-dms",
   "appliesTo": [
     "bpmn:CallActivity"
   ],
@@ -16,29 +16,15 @@
       }
     },
     {
-      "label": "Event Topic",
-      "type": "String",
-      "value": "",
-      "binding": {
-        "type": "camunda:in",
-        "expression": true,
-        "name": "app_topic_name",
-        "target": "app_topic_name"
-      },
-      "constraints": {
-        "notEmpty": true
-      }
-    },
-    {
-      "label": "Event Message",
+      "label": "Integration Name",
       "type": "String",
       "editable": false,
-      "value": "genericEvent",
+      "value": "dmsIntegration",
       "binding": {
         "type": "camunda:in",
-        "expression": true,
-        "name": "app_message_name",
-        "target": "app_message_name"
+        "name": "app_integration_name",
+        "target": "app_integration_name",
+        "expression": true
       },
       "constraints": {
         "notEmpty": true
@@ -48,7 +34,7 @@
       "label": "Type Header",
       "type": "String",
       "editable": false,
-      "value": "searchFile",
+      "value": "updateDocument",
       "binding": {
         "type": "camunda:in",
         "expression": true,
@@ -60,15 +46,29 @@
       }
     },
     {
-      "label": "Suche",
+      "label": "File Context",
       "type": "String",
-      "description": "untergruppe.*-sachakte-*",
+      "editable": false,
+      "value": "${app_file_context}",
+      "binding": {
+        "type": "camunda:in",
+        "expression": true,
+        "name": "fileContext",
+        "target": "fileContext"
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "label": " Dokument-COO",
+      "type": "String",
       "value": "",
       "binding": {
         "type": "camunda:in",
         "expression": true,
-        "name": "searchString",
-        "target": "searchString"
+        "name": "documentCoo",
+        "target": "documentCoo"
       },
       "constraints": {
         "notEmpty": true
@@ -89,43 +89,33 @@
       }
     },
     {
-      "label": "Fachdatum Referenz",
-      "type": "String",
-      "value": "",
-      "description": "Suche auf ein Fachdatum eingrenzen",
+      "label": "Typ (Ein-/Ausgehend/Intern)",
+      "type": "Dropdown",
+      "value": "EINGEHEND",
+      "choices": [
+        { "name": "Eingehend", "value": "EINGEHEND" },
+        { "name": "Ausgehend", "value": "AUSGEHEND" },
+        { "name": "Intern", "value": "INTERN" }
+      ],
       "binding": {
         "type": "camunda:in",
         "expression": true,
-        "name": "reference",
-        "target": "reference"
+        "name": "type",
+        "target": "type"
       },
       "constraints": {
-        "notEmpty": false
+        "notEmpty": true
       }
     },
     {
-      "label": "Fachdatum Wert",
+      "label": "Pfad(e) im S3",
       "type": "String",
       "value": "",
-      "description": "Wert für die Eingrenzung der Suche auf ein Fachdatum",
       "binding": {
         "type": "camunda:in",
         "expression": true,
-        "name": "value",
-        "target": "value"
-      },
-      "constraints": {
-        "notEmpty": false
-      }
-    },
-    {
-      "label": "Sachakte (Coo)",
-      "description": "Out Mapping",
-      "type": "String",
-      "value": "",
-      "binding": {
-        "type": "camunda:out",
-        "source": "fileCoo"
+        "name": "filepaths",
+        "target": "filepaths"
       },
       "constraints": {
         "notEmpty": true
