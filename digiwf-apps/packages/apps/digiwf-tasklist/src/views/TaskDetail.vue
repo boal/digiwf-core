@@ -10,6 +10,15 @@
       <span class="processName grey--text">{{ task.processName }}</span>
       <h1>{{ task.name }}</h1>
       <p>{{ task.description }}</p>
+      <v-flex
+        v-if="task.links.length > 0"
+        style="margin-bottom: 1em"
+      >
+        <task-links
+          :links="task.links"
+        />
+      </v-flex>
+
       <base-form
         v-if="task.form"
         :is-saving="isSaving"
@@ -172,9 +181,12 @@ import router from "../router";
 import {mergeObjects} from "../utils/mergeObjects";
 import {validateSchema} from "../utils/validateSchema";
 import {parseQueryParameterInputs} from "../utils/urlQueryForFormFields";
+import TaskLinks from "../components/task/links/TaskLinks.vue";
 
 @Component({
-  components: {TaskFollowUpDialog, BaseForm, AppToast, TaskForm: BaseForm, AppViewLayout, AppYesNoDialog, LoadingFab}
+  components: {
+    TaskLinks, TaskFollowUpDialog, BaseForm, AppToast, TaskForm: BaseForm, AppViewLayout, AppYesNoDialog, LoadingFab
+  }
 })
 export default class TaskDetail extends SaveLeaveMixin {
 
@@ -352,4 +364,5 @@ export default class TaskDetail extends SaveLeaveMixin {
     return this.hasChanges;
   }
 }
+
 </script>
