@@ -24,7 +24,12 @@ jobs:
                 org: owner,
                 team_slug: 'digiwf_maintainer'
             });
-            return maintainers.data.map(u => u.login)
+            await github.rest.issues.addAssignees({
+              owner,
+              repo,
+              issue_number,
+              assignees: maintainers.data.map(u => u.login)
+            });
       - name: 'Assign Issue'
         if: github.event.issue.author_association != 'MEMBER'
         uses: actions/github-script@v7
@@ -33,12 +38,6 @@ jobs:
           script: |
             const { repo, owner } = context.repo;
             const issue_number = context.issue.number;
-            await github.rest.issues.addAssignees({
-              owner,
-              repo,
-              issue_number,
-              assignees: steps.get-team.outputs.result,
-            });
             await github.rest.issues.createComment({
               issue_number,
               owner,
