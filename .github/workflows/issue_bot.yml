@@ -30,7 +30,7 @@ jobs:
               assignees: teamMembers.data.map(u => u.login),
             });
             await github.rest.issues.createComment({
-              issue_number,
+              issue_number: issue_number,
               owner: owner,
               repo: repo,
               body: '👋 Thanks for reporting! The maintainers have been notified and will get back to you.'
