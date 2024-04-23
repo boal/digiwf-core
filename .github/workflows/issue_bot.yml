@@ -15,6 +15,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
+          debug: true
           script: |
             const { repo, owner } = context.repo;
             const teamMembers =  await github.rest.teams.listMembersInOrg({
