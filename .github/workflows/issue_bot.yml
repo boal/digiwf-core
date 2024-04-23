@@ -37,7 +37,7 @@ jobs:
               owner,
               repo,
               issue_number,
-              assignees: `${{steps.get-team.outputs.result}}`,
+              assignees: steps.get-team.outputs.result,
             });
             await github.rest.issues.createComment({
               issue_number,
