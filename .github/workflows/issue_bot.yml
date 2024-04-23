@@ -14,6 +14,7 @@ jobs:
         if: github.event.issue.author_association != 'MEMBER'
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.ACCESS_TOKEN }}
           script: |
             const { repo, owner } = context.repo;
             const teamMembers =  await github.rest.teams.listMembersInOrg({
