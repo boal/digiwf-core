@@ -26,5 +26,5 @@ jobs:
               owner,
               repo,
               issue_number: context.issue.number,
-              assignees: teamMembers,
+              assignees: teamMembers.map(u => u.login),
             });
