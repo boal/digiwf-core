@@ -1,6 +1,6 @@
 <template>
   <c-container fluid>
-    <service-instance-card />
+    <task-card />
   </c-container>
 </template>
 
@@ -10,8 +10,8 @@ import type { RootHeadingLevel } from "@/types/RootHeadingLevel";
 import { CContainer } from "@coreui/vue";
 import { defineProps, toRefs, withDefaults } from "vue";
 
-import ServiceInstanceCard from "@/components/ServiceInstance/ServiceInstanceCard.vue";
-import { useServiceInstanceControllerAPI } from "@/composables/ServiceInstanceControllerApi/useServiceInstanceControllerAPI";
+import TaskCard from "@/components/Task/TaskCard.vue";
+import { useTasksAPI } from "@/composables/TasksApi/useTasksAPI";
 import { useAccessToken } from "@/composables/useAccessToken";
 import { useBaseURL } from "@/composables/useBaseURL";
 import { useProvideParameters } from "@/composables/useParameters";
@@ -43,7 +43,7 @@ useProvideParameters(pageSize, maxPagesVisible, rootHeadingLevel);
 
 const { baseURL } = useBaseURL();
 const { accessToken } = useAccessToken(accessTokenEventName);
-useServiceInstanceControllerAPI(baseURL, accessToken);
+useTasksAPI(baseURL, accessToken);
 </script>
 
 <style lang="scss">
