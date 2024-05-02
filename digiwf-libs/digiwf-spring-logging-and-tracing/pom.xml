@@ -13,7 +13,6 @@
     <description>Logging and Tracing configuration and libraries used for DigiWF</description>
     <packaging>pom</packaging>
 
-
     <dependencies>
         <dependency>
             <groupId>io.micrometer</groupId>
@@ -36,6 +35,5 @@
             <artifactId>logstash-logback-encoder</artifactId>
             <version>7.4</version>
         </dependency>
-
     </dependencies>
 </project>
