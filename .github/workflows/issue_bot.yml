@@ -17,6 +17,7 @@ jobs:
           github-token: ${{ secrets.ACCESS_TOKEN }}
           debug: true
           script: |
+            const { owner } = context.repo;
             const author = context.payload.sender.login;
             const maintainers = await github.rest.teams.listMembersInOrg({
                 org: owner,
