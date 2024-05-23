@@ -39,7 +39,7 @@ jobs:
             
             return !coreMembers.includes(author)
       - name: 'Assign Issue'
-        if: steps.check-author.outputs.result
+        if: job.steps.check-author.outputs.result
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
@@ -58,7 +58,7 @@ jobs:
               assignees: maintainers.data.map(u => u.login)
             });
       - name: 'Inform Author'
-        if: steps.check-author.outputs.result
+        if: job.steps.check-author.outputs.result
         uses: actions/github-script@v7
         with:
           debug: true
