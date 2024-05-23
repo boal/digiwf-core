@@ -32,11 +32,7 @@ jobs:
                 team_slug: 'digiwf_admin'
             });
             const coreMembers = maintainers.data.concat(devs.data, admins.data).map(u => u.login)
-            
-            console.log(author)
-            console.log(coreMembers)
-            console.log(!coreMembers.includes(author))
-            
+
             return !coreMembers.includes(author)
       - name: 'Assign Issue'
         if: job.steps.check-author.outputs.result
